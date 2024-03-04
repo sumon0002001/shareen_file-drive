@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import React from "react";
 import {
@@ -6,8 +8,11 @@ import {
   SignOutButton,
   SignedOut,
 } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const HomePage = () => {
+  const createFile = useMutation(api.files.createFile);
   return (
     <div>
       <SignedIn>
@@ -20,6 +25,15 @@ const HomePage = () => {
           <Button>Signin</Button>
         </SignInButton>
       </SignedOut>
+      <Button
+        onClick={() => {
+          createFile({
+            name: "test.txt",
+          });
+        }}
+      >
+        click me
+      </Button>
     </div>
   );
 };
