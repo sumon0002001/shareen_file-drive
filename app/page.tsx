@@ -8,10 +8,11 @@ import {
   SignOutButton,
   SignedOut,
 } from "@clerk/nextjs";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 const HomePage = () => {
+  const files = useQuery(api.files.getFiles);
   const createFile = useMutation(api.files.createFile);
   return (
     <div>
@@ -25,6 +26,9 @@ const HomePage = () => {
           <Button>Signin</Button>
         </SignInButton>
       </SignedOut>
+      {files?.map((file) => {
+        return <div key={file.id}>{file.name}</div>;
+      })}
       <Button
         onClick={() => {
           createFile({
