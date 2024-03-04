@@ -1,12 +1,25 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { SignInButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignedIn,
+  SignOutButton,
+  SignedOut,
+} from "@clerk/nextjs";
 
 const HomePage = () => {
   return (
     <div>
-      <SignInButton>Hello</SignInButton>
-      <Button>Hello</Button>
+      <SignedIn>
+        <SignOutButton>
+          <Button>Signout</Button>
+        </SignOutButton>
+      </SignedIn>
+      <SignedOut>
+        <SignInButton mode="modal">
+          <Button>Signin</Button>
+        </SignInButton>
+      </SignedOut>
     </div>
   );
 };
